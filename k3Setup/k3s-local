@@ -1,0 +1,73 @@
+#!/bin/bash
+
+set -e
+
+case "$1" in
+    start)
+        echo ">>> Starting K3s..."
+        systemctl start k3s
+
+        echo ">>> Waiting for Kubernetes API..."
+        until kubectl get nodes >/dev/null 2>&1; do
+            sleep 2
+        done
+
+        echo ">>> Starting Nginx reverse proxy..."
+        systemctl start nginx
+
+        echo
+        echo ">>> K3s environment is ready."
+        kubectl get nodes
+        echo
+        kubectl get pods -A
+        ;;
+
+    stop)
+        echo ">>> Stopping Nginx reverse proxy..."
+        systemctl stop nginx
+
+        echo ">>> Stopping K3s..."
+        systemctl stop k3s
+
+        echo
+        echo ">>> K3s environment stopped."
+        ;;
+
+    shutdown)
+        echo ">>> Stopping Nginx..."
+        systemctl stop nginx
+
+        echo ">>> Completely stopping K3s..."
+        systemctl stop k3s
+
+        if [ -x /usr/local/bin/k3s-killall.sh ]; then
+            /usr/local/bin/k3s-killall.sh
+        fi
+
+        echo
+        echo ">>> K3s environment completely stopped."
+        ;;
+
+    restart)
+        "$0" stop
+        "$0" start
+        ;;
+
+    status)
+        echo "===== K3s ====="
+        systemctl status k3s --no-pager || true
+
+        echo
+        echo "===== Nginx ====="
+        systemctl status nginx --no-pager || true
+
+        echo
+        echo "===== Kubernetes ====="
+        kubectl get nodes 2>/dev/null || echo "Kubernetes API is not available."
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+        ;;
+esac

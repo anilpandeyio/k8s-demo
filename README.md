@@ -14,3 +14,4 @@ curl http://10.43.167.242:80 => Cluster IP access (Use the ClusterIP + Service p
 # helm
 [root@MA-JF46674 ~/workspace/k8s-demo]$ helm install node-k8-demo ./node-k8-demo/
 [root@MA-JF46674 ~/workspace/k8s-demo]$ helm upgrade node-k8-demo ./node-k8-demo/ -f node-k8-demo/values-staging.yaml
+[root@MA-JF46674 ~/workspace/k8s-demo (main)]$ helm uninstall node-k8-demo

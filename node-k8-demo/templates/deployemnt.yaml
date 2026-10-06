@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {{ .Values.appName }}-deployment
+ labels:
+   app: {{ .Values.appName }}
+spec:
+ replicas: {{ .Values.replicaCount }}
+ selector:
+   matchLabels:
+     app: {{ .Values.appName }}
+ template:
+   metadata:
+     labels:
+       app: {{ .Values.appName }}
+     annotations:
+       # forces a rollout when configmap contents change
+       checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+   spec:
+     containers:
+       - name: {{ .Values.appName }}
+         image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+         imagePullPolicy: {{ .Values.image.pullPolicy }}
+         ports:
+           - containerPort: {{ .Values.container.port }}
+         envFrom:
+           - configMapRef:
+               name: {{ .Values.appName }}-config

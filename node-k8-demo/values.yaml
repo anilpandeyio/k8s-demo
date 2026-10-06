@@ -30,3 +30,5 @@ service:
 environment:
   NODE_ENV: development
   LOG_LEVEL: debug
+
+namespace: default

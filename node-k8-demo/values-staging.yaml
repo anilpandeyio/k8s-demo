@@ -2,8 +2,10 @@ replicaCount: 6
 
 service:
   type: NodePort
-  nodePort: 30080
+  nodePort: 30081
 
 environment:
   NODE_ENV: staging
   LOG_LEVEL: debug
+
+namespace: staging

@@ -6,3 +6,5 @@ service:
 environment:
   NODE_ENV: production
   LOG_LEVEL: all
+
+namespace: production

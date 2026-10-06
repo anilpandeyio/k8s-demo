@@ -7,6 +7,9 @@
 ## Stop/remove application
 `kubectl delete -f .`
 
+##  k3sLocal
+Move to this location `/usr/local/bin/k3s-local`
+
 ## to check on termnal
 ```
 curl http://localhost:30080 => Node Port access (NodeIP:NodePort)

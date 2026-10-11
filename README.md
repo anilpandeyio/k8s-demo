@@ -70,3 +70,6 @@ helm uninstall node-k8-demo
 ### Environment variables
 
 App config (`NODE_ENV`, `LOG_LEVEL`) is defined under `environment:` in each values file and injected into the container via a `ConfigMap` (`templates/configmap.yaml`) consumed through `envFrom`. A `checksum/config` pod annotation forces a rollout whenever the ConfigMap content changes.
+
+### Runing Condition
+![alt text](image.png)

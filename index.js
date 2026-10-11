@@ -7,7 +7,7 @@ const nodeEnv = process.env.NODE_ENV || "EMPTYYYYYY";
 
 app.get("/", (req, res) => {
     res.json({
-        message: "Hello from Node.js running inside Kubernetes!",
+        message: "Hello from Node.js running inside Kubernetes! Testing again",
         hostname: process.env.HOSTNAME,
         logLevel: logLevel,
         nodeEnv: nodeEnv

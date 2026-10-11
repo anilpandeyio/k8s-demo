@@ -4,6 +4,7 @@ metadata:
  name: k8node-deployment
  labels:
    app: k8node
+ namespace: anil
 spec:
  replicas: 4
  selector:
@@ -16,8 +17,8 @@ spec:
    spec:
      containers:
        - name: k8node
-         image: k8node:v1
-         imagePullPolicy: Never
+         image: anilpandeyio/k8node:v4
+         imagePullPolicy: Always
          ports:
            - containerPort: 3000
          env:

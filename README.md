@@ -18,6 +18,7 @@ node-k8-demo/           # Helm chart (Deployment, Service, ConfigMap, Namespace)
 - Image `k8node:<tag>` built and available to the cluster (see `image.repository`/`image.tag` in values files)
 
 For local Kubernetes setup on macOS with Colima and Minikube, see [mac-setup.md](mac-setup.md).
+For a flowchart of deployment, configuration, and request traffic, see [architecture-flow.md](architecture-flow.md).
 
 ## Option 1: Plain manifests (`k8s/`)
 
